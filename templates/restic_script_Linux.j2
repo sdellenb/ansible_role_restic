@@ -320,10 +320,10 @@ esac
     cleanup_vol $BACKUP_SOURCE
 {% endif %}
 
-
 {#
   Define stdin forget commands
 #}
+{% if not (item.skip_forget is defined and item.skip_forget) %}
 {{ restic_install_path }}/restic forget {{ paths(item) }} {{ retention_pattern(item) }} {% if item.prune is defined and item.prune == true %}--prune{% endif %} {% if item.forget_extra_args is defined %}{{ item.forget_extra_args }}{% endif %} {{ forget_output_log }}
 
 FORGET_EXIT_CODE=$?
@@ -347,6 +347,7 @@ else
       {{ ' ' }}Please repair the restic-{{ item.name | replace(' ', '') }} job."
     {% endif %}
 fi
+{% endif %}
 
 {#
   post_backup_cmd was previously named past_backup_cmd,
