@@ -103,6 +103,7 @@ BACKUP_SOURCE='{{ item.src| join(' ') }}'
 
 PRE_CMD_EXIT_CODE=0
 POST_CMD_EXIT_CODE=0
+FORGET_EXIT_CODE=0
 
 {% if item.lvm is defined %}
 # Set up functions for LVM.
